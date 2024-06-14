@@ -127,18 +127,16 @@ def validate_destination_path(dest_folder: str, file_path: str) -> str:
     return dest_path
 
 
-def main(source_file: str = None, dest_folder: str = None) -> None:
-    if source_file is not None and dest_folder is not None:
-        parser = argparse.ArgumentParser()
-        parser.add_argument('source_file', type=str)
-        parser.add_argument('dest_folder', type=str)
-        args = parser.parse_args()
-        source_file = args.source_file
-        dest_folder = args.dest_folder
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument('source_file', type=str)
+    parser.add_argument('dest_folder', type=str)
+    args = parser.parse_args()
+    source_file = args.source_file
+    dest_folder = args.dest_folder
 
     move_file(source_file, dest_folder, Lock())
 
 
 if __name__ == "__main__":
-    main("/Users/Shared/Workspace/reconciliation-report-2024-04-09.csv", "/Users/Shared/Workspace/dest/")
-    #main()
+    main()

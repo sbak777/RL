@@ -1,3 +1,4 @@
+import argparse
 import logging
 from collections import Counter
 from typing import List
@@ -56,6 +57,17 @@ class LinesSorter:
             logging.error(f"An error occurred while writing to the file '{output_file_path}': {e}")
 
 
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('input_file', type=str)
+    parser.add_argument('output_file', type=str, nargs='?')
+    args = parser.parse_args()
+
+    input_file = args.input_file
+    output_file = args.output_file if args.output_file else input_file
+
+    LinesSorter.write_to_file(LinesSorter.sort_lines(input_file), output_file)
+
 
 if __name__ == "__main__":
-    LinesSorter.write_to_file(LinesSorter.sort_lines("../../../long_words.txt"), "../../../output3.txt")
+    main()
